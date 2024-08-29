@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: shopping_cart_mysql
+    environment:
+      MYSQL_DATABASE: shopping_cart_db
+      MYSQL_USER: mukesh_root
+      MYSQL_PASSWORD: password@24
+      MYSQL_ROOT_PASSWORD: password@24
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - shopping_cart_network
+
+volumes:
+  mysql_data:
+
+networks:
+  shopping_cart_network:
+    driver: bridge
