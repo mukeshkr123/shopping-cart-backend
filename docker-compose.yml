@@ -10,9 +10,23 @@ services:
       MYSQL_PASSWORD: password@24
       MYSQL_ROOT_PASSWORD: password@24
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - shopping_cart_network
+
+  spring-boot-app:
+    image: mukeshkr1234/shopping_cart_app:latest
+    container_name: shopping_cart_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/shopping_cart_db
+      SPRING_DATASOURCE_USERNAME: mukesh_root
+      SPRING_DATASOURCE_PASSWORD: password@24
     networks:
       - shopping_cart_network
 
